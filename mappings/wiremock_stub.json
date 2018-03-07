@@ -1,0 +1,16 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/data"
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": [
+		{ "column1": 11, "column2": 12 },
+		{ "column1": 21, "column2": 22 }
+	],
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

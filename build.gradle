@@ -1,0 +1,47 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.junit.platform:junit-platform-gradle-plugin:1.0.0")
+        classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0"
+    }
+}
+
+
+//plugins {
+//    id 'com.palantir.docker' version '0.13.0'
+//}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: "org.junit.platform.gradle.plugin"
+
+group = 'data-assets-integration-platform'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+ext {
+    springCloudVersion = 'Edgware.SR1'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+jar {
+    archiveName = "scheduler.jar"
+}
+
+
+apply from: "$projectDir/gradleSetting/index.gradle"

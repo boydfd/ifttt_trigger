@@ -1,0 +1,20 @@
+das:
+  ribbon:
+    listOfServers: data-access:8080
+
+spring:
+    datasource:
+      driverClassName: "com.mysql.cj.jdbc.Driver"
+      url: "jdbc:mysql://10.70.224.217:3307/scheduler?nullNamePatternMatchesAll=true"
+      username: "scheduler_service"
+      password: "bVEnzqtNXTyJye4a"
+
+org:
+  quartz:
+    dataSource:
+      springDataSource:
+        driver: "com.mysql.cj.jdbc.Driver"
+        url: "jdbc:mysql://10.70.224.217:3307/scheduler?nullNamePatternMatchesAll=true"
+        username: "scheduler_service"
+        password: "bVEnzqtNXTyJye4a"
+

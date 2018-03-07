@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: scheduler
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+    serialization:
+      write_dates_as_timestamps: false
+  datasource:
+    driverClassName: "org.h2.Driver"
+    url: "jdbc:h2:mem:scheduler;MODE=MYSQL"
+    username: "sa"
+    password:
+  jpa:
+    hibernate:
+      ddlAuto: none
+    showSql: true
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        web-allow-others: true
+
+liquibase:
+  enabled: true
+  change-log: classpath:/db/changelog/db.changelog.xml
+
+
+das:
+  ribbon:
+    listOfServers: localhost:8000
+
+org:
+  quartz:
+    jobStore:
+      class: org.quartz.impl.jdbcjobstore.JobStoreTX
+      driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      dataSource: springDataSource
+    dataSource:
+      springDataSource:
+        driver: "org.h2.Driver"
+        url: "jdbc:h2:mem:scheduler;MODE=MYSQL"
+        username: "sa"
+        password:
+
