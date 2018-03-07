@@ -1,7 +1,7 @@
 apply plugin: "com.palantir.docker"
 
 docker {
-    def dockerRegistry = '10.10.5.46:8083'
+    def dockerRegistry = '192.168.42.10:5000'
     def jarName = jar.baseName.toLowerCase()
     name "${dockerRegistry}/data-assets-integration-platform/$jarName"
     tags 'latest'
@@ -12,11 +12,7 @@ docker {
 }
 
 
-task loginToDocker(type: Exec) {
-    executable "${project.ext.settingDir}/docker/docker-login.sh"
-}
-
-task pushToDockerRegistry(type: Exec, dependsOn: ['build', 'docker', 'loginToDocker']) {
+task pushToDockerRegistry(type: Exec, dependsOn: ['build', 'docker']) {
     def pipe = System.getenv("GO_PIPELINE_LABEL")
     if (pipe) {
         executable "${project.ext.settingDir}/docker/pushDockerImageToRegistry.sh"
