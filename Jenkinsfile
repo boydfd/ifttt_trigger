@@ -1,5 +1,4 @@
 pipeline {
-    agent none
     stages {
         stage('Test') {
             agent {
@@ -17,6 +16,13 @@ pipeline {
                     junit 'build/test-results/**/*.xml'
                     checkstyle pattern: 'build/reports/checkstyle/*.xml'
                 }
+            }
+        }
+
+        stage('Build Docker') {
+            agnet any
+            steps {
+                sh 'echo "Hello World"'
             }
         }
     }
