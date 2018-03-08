@@ -11,7 +11,7 @@ pipeline {
             }
             steps {
                 sh 'echo "Hello World"'
-                sh './gradlew check'
+                sh './gradlew clean build'
             }
             post {
                 always {
@@ -30,7 +30,15 @@ pipeline {
                 }
             }
             steps {
-                sh 'ls build'
+                step([  $class: 'CopyArtifact',
+                        filter: 'test.zip',
+                        fingerprintArtifacts: true,
+                        projectName: '${JOB_NAME}',
+                        selector: [$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}']
+                ])
+
+                sh 'cp archive_new/*.jar docker/app.jar'
+                sh 'docker/build.sh app.jar'
             }
         }
     }

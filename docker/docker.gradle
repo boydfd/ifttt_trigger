@@ -1,0 +1,24 @@
+apply plugin: "com.palantir.docker"
+
+docker {
+    def dockerRegistry = '192.168.42.10:5000'
+    def jarName = jar.baseName.toLowerCase()
+    name "${dockerRegistry}/data-assets-integration-platform/$jarName"
+    tags 'latest'
+    dockerfile file("${project.ext.settingDir}/docker/Dockerfile")
+    files jar, "${project.ext.settingDir}/docker/entrypoint.sh"
+    buildArgs([JAR_FILE: jar.archiveName])
+    projects.ext.imageName = name
+}
+
+
+task pushToDockerRegistry(type: Exec, dependsOn: ['build', 'docker']) {
+    def pipe = System.getenv("BUILD_NUMBER")
+    if (pipe) {
+        executable "${project.ext.settingDir}/docker/pushDockerImageToRegistry.sh"
+        def argsList = [projects.imageName, pipe]
+        args = argsList
+    } else {
+        commandLine "echo"
+    }
+}
