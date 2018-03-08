@@ -1,4 +1,5 @@
 pipeline {
+    agent none
     stages {
         stage('Test') {
             agent {
@@ -20,7 +21,12 @@ pipeline {
         }
 
         stage('Build Docker') {
-            agnet any
+            agent {
+                docker {
+                    image 'java:8-jdk-alpine'
+                    args '-v /home/jenkins/.gradle:/root/.gradle'
+                }
+            }
             steps {
                 sh 'echo "Hello World"'
             }
