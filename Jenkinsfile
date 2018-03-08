@@ -31,7 +31,7 @@ pipeline {
             }
             steps {
                 step([  $class: 'CopyArtifact',
-                        filter: 'test.zip',
+                        filter: 'build/libs/*.jar',
                         fingerprintArtifacts: true,
                         projectName: '${JOB_NAME}',
                         selector: [$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}']
