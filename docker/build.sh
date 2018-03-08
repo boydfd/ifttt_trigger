@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 dockerRegistry='192.168.42.10:5000'
 imageName=ifttt-trigger
