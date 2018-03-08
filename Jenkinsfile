@@ -6,7 +6,7 @@ pipeline {
         }
     }
     stages {
-        stage('test') {
+        stage('Test') {
             steps {
                 sh 'echo "Hello World"'
                 sh './gradlew check'
@@ -16,6 +16,11 @@ pipeline {
                     junit 'build/test-results/**/*.xml'
                     checkstyle pattern: 'build/reports/checkstyle/*.xml'
                 }
+            }
+        }
+        stage('Build') {
+            steps {
+                sh './gradlew pushToDockerRegistry'
             }
         }
     }

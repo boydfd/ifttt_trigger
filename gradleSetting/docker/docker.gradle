@@ -13,7 +13,7 @@ docker {
 
 
 task pushToDockerRegistry(type: Exec, dependsOn: ['build', 'docker']) {
-    def pipe = System.getenv("GO_PIPELINE_LABEL")
+    def pipe = System.getenv("BUILD_NUMBER")
     if (pipe) {
         executable "${project.ext.settingDir}/docker/pushDockerImageToRegistry.sh"
         def argsList = [projects.imageName, pipe]
