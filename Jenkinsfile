@@ -1,3 +1,4 @@
+#!groovy​
 pipeline {
     agent none
     stages {
@@ -16,6 +17,7 @@ pipeline {
                 always {
                     junit 'build/test-results/**/*.xml'
                     checkstyle pattern: 'build/reports/checkstyle/*.xml'
+                    archiveArtifacts artifacts: '/build/libs/*.jar', fingerprint: true
                 }
             }
         }
@@ -23,12 +25,12 @@ pipeline {
         stage('Build Docker') {
             agent {
                 docker {
-                    image 'java:8-jdk-alpine'
-                    args '-v /home/jenkins/.gradle:/root/.gradle'
+                    image 'docker:stable'
+                    args '-v /var/run/docker.sock:/var/run/docker.sock'
                 }
             }
             steps {
-                sh 'echo "Hello World"'
+                sh 'ls build'
             }
         }
     }
