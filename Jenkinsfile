@@ -17,7 +17,7 @@ pipeline {
                 always {
                     junit 'build/test-results/**/*.xml'
                     checkstyle pattern: 'build/reports/checkstyle/*.xml'
-                    archiveArtifacts artifacts: '/build/libs/*.jar', fingerprint: true
+                    archiveArtifacts artifacts: './build/libs/*.jar', fingerprint: true
                 }
             }
         }
