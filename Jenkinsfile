@@ -11,6 +11,12 @@ pipeline {
                 sh 'echo "Hello World"'
                 sh './gradlew check'
             }
+            post {
+                always {
+                    junit 'build/test-results/**/*.xml'
+                    checkstyle pattern: 'build/reports/checkstyle/*.xml'
+                }
+            }
         }
     }
 }
