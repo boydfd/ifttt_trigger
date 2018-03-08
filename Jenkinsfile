@@ -37,8 +37,8 @@ pipeline {
                         selector: [$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}']
                 ])
 
-                sh 'll'
-                sh 'll archive_new'
+                sh 'ls -l'
+                sh 'ls -l archive_new'
                 sh 'cp archive_new/build/libs/*.jar docker/app.jar'
                 sh 'docker/build.sh app.jar'
             }
