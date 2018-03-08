@@ -19,11 +19,5 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker') {
-            agnet any
-            steps {
-                sh './gradlew pushToDockerRegistry'
-            }
-        }
     }
 }
