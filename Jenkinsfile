@@ -1,12 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'java:8-jdk-alpine'
-            args '-v /home/jenkins/.gradle:/root/.gradle'
-        }
-    }
     stages {
         stage('Test') {
+            agent {
+                docker {
+                    image 'java:8-jdk-alpine'
+                    args '-v /home/jenkins/.gradle:/root/.gradle'
+                }
+            }
             steps {
                 sh 'echo "Hello World"'
                 sh './gradlew check'
@@ -18,7 +18,8 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Build Docker') {
+            agnet any
             steps {
                 sh './gradlew pushToDockerRegistry'
             }
