@@ -38,8 +38,8 @@ pipeline {
                 ])
 
                 sh 'ls -l'
-                sh 'ls -l archive_new'
-                sh 'cp archive_new/build/libs/*.jar docker/app.jar'
+                sh 'ls -l build'
+                sh 'cp build/libs/*.jar docker/app.jar'
                 sh 'docker/build.sh app.jar'
             }
         }
