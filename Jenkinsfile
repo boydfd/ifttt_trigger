@@ -43,5 +43,9 @@ pipeline {
                 sh 'docker/build.sh app.jar'
             }
         }
+
+        stage('Deploy') {
+            sh 'ssh rlin@192.168.42.10 mkdir 1111111111111'
+        }
     }
 }
