@@ -53,17 +53,16 @@ pipeline {
                 }
             }
             steps {
-                sshPublisher(publishers: [sshPublisherDesc(
-                        configName: serverHostname,
-                        transfers: [sshTransfer(
-                                execCommand: '''
-                                            echo "1111111111111111"
-                                        ''',
-                                execTimeout: 120000,
-                                sourceFiles: '')],
-                        usePromotionTimestamp: false,
-                        useWorkspaceInPromotion: false,
-                        verbose: false)])
+                sshPublisher(publishers: [
+                        sshPublisherDesc(
+                                configName: 'swpsci06',
+                                transfers: [sshTransfer(
+                                        execCommand: 'echo 111111111111',
+                                        execTimeout: 120000,
+                                        sourceFiles: '')],
+                                usePromotionTimestamp: false,
+                                useWorkspaceInPromotion: false,
+                                verbose: false)])
 //                sh 'ls ~/.ssh'
 //                sh 'ssh -o StrictHostKeyChecking=no rlin@192.168.42.10 mkdir 1111111111111'
             }
