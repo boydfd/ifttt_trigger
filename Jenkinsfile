@@ -45,6 +45,12 @@ pipeline {
         }
 
         stage('Deploy') {
+            agent {
+                docker {
+                    image 'busybox'
+                    args '-v $HOME/.ssh:/~/.ssh'
+                }
+            }
             sh 'ssh rlin@192.168.42.10 mkdir 1111111111111'
         }
     }
