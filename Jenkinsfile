@@ -52,10 +52,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'sleep 1000000'
                 sh 'ls ~/.ssh'
-                sh 'ls ~/.ssh/known_hosts'
-                sh 'ssh rlin@192.168.42.10 mkdir 1111111111111'
+                sh 'ssh -o StrictHostKeyChecking=no rlin@192.168.42.10 mkdir 1111111111111'
             }
         }
     }
