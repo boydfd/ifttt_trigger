@@ -67,7 +67,7 @@ pipeline {
 //                ])
                 sshPublisher(publishers: [
                         sshPublisherDesc(
-                                configName: 'swpsci06',
+                                configName: 'rlin',
                                 transfers: [sshTransfer(
                                         execCommand: 'echo 111111111111',
                                         execTimeout: 120000,
@@ -75,8 +75,6 @@ pipeline {
                                 usePromotionTimestamp: false,
                                 useWorkspaceInPromotion: false,
                                 verbose: false)])
-                sh 'ls ~/.ssh'
-                sh 'ssh -o StrictHostKeyChecking=no rlin@192.168.42.10 mkdir 1111111111111'
             }
         }
     }
