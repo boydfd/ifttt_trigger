@@ -47,8 +47,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
-                    image 'governmentpaas/git-ssh'
-                    args '-v /var/jenkins_home/.ssh:/root/.ssh'
+                    image 'busybox'
                 }
             }
             steps {
@@ -69,7 +68,7 @@ pipeline {
                         sshPublisherDesc(
                                 configName: 'rlin',
                                 transfers: [sshTransfer(
-                                        execCommand: 'echo 111111111111',
+                                        execCommand: 'echo 111',
                                         execTimeout: 120000,
                                         sourceFiles: '')],
                                 usePromotionTimestamp: false,
