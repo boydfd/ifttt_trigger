@@ -48,7 +48,7 @@ pipeline {
             agent {
                 docker {
                     image 'governmentpaas/git-ssh'
-                    args '-v /home/jenkins/.ssh:/root/.ssh'
+                    args '-v /var/jenkins_home/.ssh:/root/.ssh'
                 }
             }
             steps {
