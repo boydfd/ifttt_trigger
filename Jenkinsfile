@@ -1,5 +1,6 @@
 #!groovy​
 pipeline {
+    def serverHostname = "swpsws26"
     agent none
     stages {
         stage('Test') {
@@ -30,11 +31,11 @@ pipeline {
                 }
             }
             steps {
-                step([  $class: 'CopyArtifact',
-                        filter: 'build/libs/*.jar',
-                        fingerprintArtifacts: true,
-                        projectName: '${JOB_NAME}',
-                        selector: [$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}']
+                step([$class              : 'CopyArtifact',
+                      filter              : 'build/libs/*.jar',
+                      fingerprintArtifacts: true,
+                      projectName         : '${JOB_NAME}',
+                      selector            : [$class: 'SpecificBuildSelector', buildNumber: '${BUILD_NUMBER}']
                 ])
 
                 sh 'ls -l'
@@ -52,8 +53,19 @@ pipeline {
                 }
             }
             steps {
-                sh 'ls ~/.ssh'
-                sh 'ssh -o StrictHostKeyChecking=no rlin@192.168.42.10 mkdir 1111111111111'
+                sshPublisher(publishers: [sshPublisherDesc(
+                        configName: $serverHostname,
+                        transfers: [sshTransfer(
+                                execCommand: '''
+                                            echo "1111111111111111"
+                                        ''',
+                                execTimeout: 120000,
+                                sourceFiles: '')],
+                        usePromotionTimestamp: false,
+                        useWorkspaceInPromotion: false,
+                        verbose: false)])
+//                sh 'ls ~/.ssh'
+//                sh 'ssh -o StrictHostKeyChecking=no rlin@192.168.42.10 mkdir 1111111111111'
             }
         }
     }
