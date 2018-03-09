@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy') {
             agent {
                 docker {
-                    image 'busybox'
+                    image 'governmentpaas/git-ssh:git-ssh'
                     args '-v $HOME/.ssh:/~/.ssh'
                 }
             }
