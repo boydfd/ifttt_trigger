@@ -1,6 +1,6 @@
 #!groovy​
 pipeline {
-    def serverHostname = "swpsws26"
+    def serverHostname = "rlin"
     agent none
     stages {
         stage('Test') {
@@ -54,7 +54,7 @@ pipeline {
             }
             steps {
                 sshPublisher(publishers: [sshPublisherDesc(
-                        configName: $serverHostname,
+                        configName: serverHostname,
                         transfers: [sshTransfer(
                                 execCommand: '''
                                             echo "1111111111111111"
