@@ -1,6 +1,5 @@
 #!groovy​
 pipeline {
-    def serverHostname = "rlin"
     agent none
     stages {
         stage('Test') {
