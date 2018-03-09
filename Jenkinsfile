@@ -52,6 +52,8 @@ pipeline {
                 }
             }
             steps {
+                sh 'ls ~/.ssh'
+                sh 'ls ~/.ssh/known_hosts'
                 sh 'ssh rlin@192.168.42.10 mkdir 1111111111111'
             }
         }
