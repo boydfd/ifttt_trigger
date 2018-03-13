@@ -51,19 +51,6 @@ pipeline {
                 }
             }
             steps {
-//                step([
-//                        $class : 'SshPublisher',
-//                        publishers: [
-//                        sshPublisherDesc(
-//                                configName: 'swpsci06',
-//                                transfers: [sshTransfer(
-//                                        execCommand: 'echo 111111111111',
-//                                        execTimeout: 120000,
-//                                        sourceFiles: '')],
-//                                usePromotionTimestamp: false,
-//                                useWorkspaceInPromotion: false,
-//                                verbose: false)]
-//                ])
                 sshPublisher(publishers: [
                         sshPublisherDesc(
                                 configName: 'rlin',
