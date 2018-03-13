@@ -46,21 +46,13 @@ pipeline {
 
         stage('Deploy') {
             agent {
-                docker {
-                    image 'busybox'
-                }
+                docker { image 'busybox' }
             }
             steps {
                 sshPublisher(publishers: [
                         sshPublisherDesc(
                                 configName: 'rlin',
-                                transfers: [sshTransfer(
-                                        execCommand: 'echo 111',
-                                        execTimeout: 120000,
-                                        sourceFiles: '')],
-                                usePromotionTimestamp: false,
-                                useWorkspaceInPromotion: false,
-                                verbose: false)])
+                                transfers: [sshTransfer(execCommand: 'echo 111')])])
             }
         }
     }
